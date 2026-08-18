@@ -4,162 +4,389 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>introvert</title>
+
 <style>
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Segoe UI', Tahoma, Arial, sans-serif;
+    font-family: "Segoe UI", Tahoma, Arial, sans-serif;
     user-select: none;
 }
+
+html,
 body {
-    background: #000;
-    height: 100vh;
-    overflow: hidden;
+    width: 100%;
+    height: 100%;
+}
+
+body {
+    position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
+    min-height: 100vh;
+    overflow: hidden;
+    background: #000;
 }
+
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: 2;
+    pointer-events: none;
+    background:
+        linear-gradient(
+            135deg,
+            rgba(0, 0, 0, .62),
+            rgba(18, 18, 18, .18) 48%,
+            rgba(0, 0, 0, .75)
+        );
+}
+
+body::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: 3;
+    pointer-events: none;
+    background: radial-gradient(
+        ellipse at center,
+        transparent 38%,
+        rgba(0, 0, 0, .62) 100%
+    );
+}
+
 .back-vid {
     position: absolute;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
-    object-fit: cover;
+    inset: 0;
     z-index: 1;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
     pointer-events: none;
+    filter: brightness(.68) contrast(1.08) saturate(.72);
 }
+
 #overlay {
     position: fixed;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
-    background: #000;
+    inset: 0;
     z-index: 999;
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
+    background: #000;
+    transition: opacity .65s ease, visibility .65s ease;
 }
+
 #overlay p {
-    color: #fff;
+    color: rgba(255, 255, 255, .88);
     font-size: 19px;
-    letter-spacing: 6px;
+    font-weight: 400;
+    letter-spacing: 8px;
     text-transform: uppercase;
-    animation: pulse-txt 1.8s infinite alternate;
+    transform: scaleX(1.08);
+    text-shadow:
+        0 4px 12px rgba(0, 0, 0, .95),
+        0 2px 6px rgba(0, 0, 0, 1),
+        0 1px 3px rgba(0, 0, 0, 1);
+    animation: pulse 2s ease-in-out infinite;
 }
-@keyframes pulse-txt {
-    0% { opacity: 0.3; }
-    100% { opacity: 1; }
+
+@keyframes pulse {
+    0%,
+    100% {
+        opacity: .42;
+    }
+
+    50% {
+        opacity: 1;
+    }
 }
+
 .main-box {
     position: relative;
     z-index: 5;
-    width: 490px;
-    padding: 42px 28px;
+    width: min(620px, calc(100% - 32px));
+    padding: 46px 40px 41px;
+    overflow: hidden;
     text-align: center;
+    border: 1px solid rgba(255, 255, 255, .14);
     border-radius: 22px;
-    border: 1px solid rgba(255, 255, 255, 0.09);
-    background: linear-gradient(to bottom, rgba(38, 38, 38, 0.52) 0%, rgba(18, 18, 18, 0.68) 100%);
-    box-shadow: 0 22px 45px rgba(0, 0, 0, 0.65);
-    backdrop-filter: blur(15px);
-    -webkit-backdrop-filter: blur(15px);
+    background:
+        linear-gradient(
+            135deg,
+            rgba(255, 255, 255, .115),
+            rgba(255, 255, 255, .035) 35%,
+            rgba(12, 12, 12, .8)
+        );
+    box-shadow:
+        0 28px 65px rgba(0, 0, 0, .8),
+        0 8px 25px rgba(0, 0, 0, .42),
+        inset 0 1px rgba(255, 255, 255, .15),
+        inset 0 -1px rgba(0, 0, 0, .58);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
     opacity: 0;
     transform: translateY(18px);
-    transition: all 0.95s cubic-bezier(0.16, 1, 0.3, 1);
+    transition:
+        opacity .9s ease,
+        transform .9s ease,
+        border-color .3s ease,
+        box-shadow .3s ease;
 }
+
+.main-box::before {
+    content: "";
+    position: absolute;
+    top: -145px;
+    left: 50%;
+    width: 350px;
+    height: 210px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, .05);
+    filter: blur(65px);
+    transform: translateX(-50%);
+    pointer-events: none;
+}
+
+.main-box::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    pointer-events: none;
+    background: linear-gradient(
+        120deg,
+        transparent 18%,
+        rgba(255, 255, 255, .045) 50%,
+        transparent 82%
+    );
+}
+
+.main-box:hover {
+    border-color: rgba(255, 255, 255, .21);
+    box-shadow:
+        0 34px 76px rgba(0, 0, 0, .86),
+        0 0 28px rgba(255, 255, 255, .045),
+        inset 0 1px rgba(255, 255, 255, .18);
+}
+
 .main-box.show-box {
     opacity: 1;
     transform: translateY(0);
 }
-.pfp {
+
+.pfp-link {
+    position: relative;
+    display: inline-block;
     width: 115px;
     height: 115px;
-    border-radius: 50%;
-    object-fit: cover;
-    margin-bottom: 22px;
-    border: 2px solid rgba(255, 255, 255, 0.11);
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.45);
+    margin-bottom: 21px;
 }
+
+.pfp {
+    position: relative;
+    width: 115px;
+    height: 115px;
+    object-fit: cover;
+    border: 2px solid rgba(255, 255, 255, .2);
+    border-radius: 50%;
+    box-shadow:
+        0 0 0 8px rgba(255, 255, 255, .03),
+        0 10px 28px rgba(0, 0, 0, .64);
+    transition: transform .35s ease, box-shadow .35s ease;
+}
+
+.main-box:hover .pfp {
+    transform: translateY(-3px);
+    box-shadow:
+        0 0 0 9px rgba(255, 255, 255, .065),
+        0 14px 32px rgba(0, 0, 0, .72);
+}
+
 .txt-name {
     color: #fff;
     font-size: 33px;
     font-weight: 300;
-    letter-spacing: -0.5px;
-    margin-bottom: 5px;
-    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.7);
+    letter-spacing: 1px;
+    margin-bottom: 6px;
+    transform: scaleX(1.12);
+    text-shadow:
+        0 5px 15px rgba(0, 0, 0, .95),
+        0 3px 8px rgba(0, 0, 0, 1),
+        0 1px 4px rgba(0, 0, 0, 1);
 }
+
 .sub-status {
-    color: #fff;
+    color: rgba(255, 255, 255, .78);
     font-size: 18px;
     font-weight: 300;
-    margin-bottom: 15px;
-    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.7);
+    margin-bottom: 17px;
+    text-shadow:
+        0 4px 10px rgba(0, 0, 0, .92),
+        0 2px 6px rgba(0, 0, 0, .98),
+        0 1px 3px rgba(0, 0, 0, 1);
 }
+
 .loc-inf {
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 7px;
-    color: #b0b0b0;
+    color: rgba(255, 255, 255, .62);
     font-size: 13.5px;
     font-weight: 300;
-    margin-bottom: 12px;
-    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.6);
+    margin-bottom: 13px;
+    text-shadow:
+        0 3px 8px rgba(0, 0, 0, .9),
+        0 2px 5px rgba(0, 0, 0, .96),
+        0 1px 3px rgba(0, 0, 0, 1);
 }
+
 .loc-inf svg {
     width: 14px;
     height: 14px;
-    fill: #b0b0b0;
+    fill: rgba(255, 255, 255, .68);
+    filter: drop-shadow(0 3px 6px rgba(0, 0, 0, .92)) drop-shadow(0 1px 3px rgba(0, 0, 0, 1));
 }
+
 .years-inf {
-    color: #888888;
-    font-size: 12.5px;
+    color: rgba(255, 255, 255, .42);
+    font-size: 12px;
     font-weight: 300;
-    letter-spacing: 0.5px;
-    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.6);
+    letter-spacing: 1.5px;
+    text-shadow:
+        0 3px 8px rgba(0, 0, 0, .92),
+        0 2px 5px rgba(0, 0, 0, .98),
+        0 1px 3px rgba(0, 0, 0, 1);
+}
+
+.views-inf {
+    position: absolute;
+    left: 22px;
+    bottom: 18px;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: rgba(255, 255, 255, .55);
+    font-size: 12px;
+    font-weight: 400;
+    letter-spacing: .4px;
+    text-shadow:
+        0 3px 8px rgba(0, 0, 0, .92),
+        0 2px 5px rgba(0, 0, 0, .98),
+        0 1px 3px rgba(0, 0, 0, 1);
+}
+
+.views-inf svg {
+    width: 16px;
+    height: 16px;
+    fill: rgba(255, 255, 255, .62);
+    filter: drop-shadow(0 3px 6px rgba(0, 0, 0, .92)) drop-shadow(0 1px 3px rgba(0, 0, 0, 1));
+}
+
+@media (max-width: 520px) {
+    .main-box {
+        width: calc(100% - 24px);
+        padding: 37px 21px 34px;
+        border-radius: 20px;
+    }
+
+    .pfp-link {
+        width: 100px;
+        height: 100px;
+        margin-bottom: 19px;
+    }
+
+    .pfp {
+        width: 100px;
+        height: 100px;
+    }
+
+    .txt-name {
+        font-size: 29px;
+    }
+
+    .sub-status {
+        font-size: 16px;
+    }
+
+    #overlay p {
+        font-size: 16px;
+        letter-spacing: 6px;
+    }
+
+    .views-inf {
+        left: 19px;
+        bottom: 16px;
+    }
 }
 </style>
 </head>
+
 <body>
 
 <div id="overlay" onclick="start()">
     <p>click to enter</p>
 </div>
 
-<!-- Полностью локальные пути без доменов и внешних ссылок -->
 <video class="back-vid" id="bg-loop" loop muted playsinline>
     <source src="fon.mp4" type="video/mp4">
 </video>
 
 <div class="main-box" id="bio-card">
-    <img src="d.png" alt="pfp" class="pfp">
+    <a href="ВСТАВЬ_ССЫЛКУ_СЮДА" class="pfp-link">
+        <img src="d.png" alt="pfp" class="pfp">
+    </a>
+
     <div class="txt-name">introvert</div>
+
     <div class="sub-status">пускаю в вену Hashcat</div>
+
     <div class="loc-inf">
-        <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+        <svg viewBox="0 0 24 24">
+            <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+        </svg>
         your mother grave
     </div>
+
     <div class="years-inf">2019-2025</div>
+
+    <div class="views-inf" aria-label="views">
+        <svg viewBox="0 0 24 24">
+            <path d="M12 5c-5.5 0-9.5 7-9.5 7s4 7 9.5 7 9.5-7 9.5-7-4-7-9.5-7zm0 11.5A4.5 4.5 0 1 1 12 7a4.5 4.5 0 0 1 0 9.5zm0-2A2.5 2.5 0 1 0 12 9a2.5 2.5 0 0 0 0 5.5z"/>
+        </svg>
+        <span>483</span>
+    </div>
 </div>
 
 <audio id="bg-track" loop src="anon.mp3"></audio>
 
 <script>
 function start() {
-    var screen = document.getElementById('overlay');
-    var card = document.getElementById('bio-card');
-    var music = document.getElementById('bg-track');
-    var video = document.getElementById('bg-loop');
-    
-    screen.style.opacity = '0';
-    screen.style.visibility = 'hidden';
-    
-    video.play().catch(function(e){});
-    
+    var overlay = document.getElementById("overlay");
+    var card = document.getElementById("bio-card");
+    var music = document.getElementById("bg-track");
+    var video = document.getElementById("bg-loop");
+
+    overlay.style.opacity = "0";
+
     setTimeout(function() {
-        card.classList.add('show-box');
-        music.play().catch(function(e){});
+        overlay.style.visibility = "hidden";
+    }, 650);
+
+    video.play().catch(function() {});
+
+    setTimeout(function() {
+        card.classList.add("show-box");
+        music.play().catch(function() {});
     }, 280);
 }
 </script>
+
 </body>
 </html>
