@@ -61,7 +61,7 @@
         .profile-card {
             position: relative;
             z-index: 2;
-            background: linear-gradient(180deg, rgba(40, 40, 40, 0.6) 0%, rgba(20, 20, 20, 0.75) 100%);
+            background: linear-gradient(180deg, rgba(40, 40, 40, 0.65) 0%, rgba(20, 20, 20, 0.8) 100%);
             backdrop-filter: blur(16px);
             -webkit-backdrop-filter: blur(16px);
             border: 1px solid rgba(255, 255, 255, 0.08);
@@ -98,7 +98,7 @@
             color: #ffffff;
             letter-spacing: -0.5px;
             margin-bottom: 6px;
-            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
         }
 
         /* Белый сочный статус с мягкой тенью */
@@ -107,7 +107,7 @@
             color: #ffffff;
             font-weight: 500;
             margin-bottom: 14px;
-            text-shadow: 0 2px 6px rgba(0, 0, 0, 0.5);
+            text-shadow: 0 2px 6px rgba(0, 0, 0, 0.6);
         }
 
         /* Контрастная локация */
@@ -118,7 +118,7 @@
             gap: 6px;
             color: #b3b3b3;
             font-size: 0.85rem;
-            text-shadow: 0 1px 4px rgba(0, 0, 0, 0.4);
+            text-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
         }
 
         .location svg {
@@ -139,12 +139,13 @@
         <p>click to enter</p>
     </div>
 
+    <!-- Полностью локальные пути к файлам -->
     <video class="background-video" id="bg-video" loop muted playsinline>
-        <source src="https://githubusercontent.com" type="video/mp4">
+        <source src="fon.mp4" type="video/mp4">
     </video>
 
     <div class="profile-card" id="card">
-        <img src="https://githubusercontent.com" alt="avatar" class="avatar">
+        <img src="d.png" alt="avatar" class="avatar">
         <div class="username">introvert</div>
         <div class="status-text">пускаю в вену Hashcat</div>
         <div class="location">
@@ -153,7 +154,7 @@
         </div>
     </div>
 
-    <audio id="audio" loop src="https://githubusercontent.com"></audio>
+    <audio id="audio" loop src="anon.mp3"></audio>
 
     <script>
         function enterSite() {
