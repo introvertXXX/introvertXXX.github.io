@@ -34,7 +34,7 @@
             pointer-events: none;
         }
 
-        /* Полная симуляция эффекта "Старый TV" */
+        /* Более темный фон + эффект "Старый TV" */
         .video-overlay {
             position: absolute;
             top: 0;
@@ -43,20 +43,18 @@
             height: 100%;
             z-index: 2;
             pointer-events: none;
-            /* Затемнение по краям (Виньетка) + базовое наложение */
-            background: radial-gradient(circle, rgba(0,0,0,0) 40%, rgba(0,0,0,0.85) 100%),
-                        linear-gradient(rgba(18, 18, 18, 0) 50%, rgba(0, 0, 0, 0.25) 50%), 
-                        linear-gradient(90deg, rgba(255, 255, 255, 0.03), rgba(0, 0, 0, 0.07));
+            background: radial-gradient(circle, rgba(0,0,0,0) 20%, rgba(0,0,0,0.92) 100%),
+                        linear-gradient(rgba(10, 10, 10, 0.2) 50%, rgba(0, 0, 0, 0.45) 50%), 
+                        linear-gradient(90deg, rgba(255, 255, 255, 0.02), rgba(0, 0, 0, 0.15));
             background-size: 100% 100%, 6px 6px, 6px 6px;
         }
 
-        /* Бегущая полоса сканирования и мерцание кинескопа */
         .video-overlay::after {
             content: " ";
             display: block;
             position: absolute;
             top: 0; left: 0; bottom: 0; right: 0;
-            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.35) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.04), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.04));
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.4) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.03), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.03));
             z-index: 2;
             background-size: 100% 3px, 3px 100%;
             pointer-events: none;
@@ -87,18 +85,19 @@
             font-weight: 500;
         }
 
+        /* Премиальная табличка с ненавязчивым градиентом */
         .profile-card {
             position: relative;
             z-index: 3;
-            background: rgba(15, 15, 15, 0.55);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border: 1px solid rgba(255, 255, 255, 0.08);
+            background: linear-gradient(135deg, rgba(28, 28, 28, 0.65) 0%, rgba(14, 14, 14, 0.75) 100%);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+            border: 1px solid rgba(255, 255, 255, 0.06);
             width: 440px;
             padding: 40px 30px;
             border-radius: 24px;
             text-align: center;
-            box-shadow: 0 25px 55px rgba(0, 0, 0, 0.7);
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.8);
             opacity: 0;
             transform: translateY(15px);
             transition: opacity 0.9s ease, transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
@@ -115,23 +114,25 @@
             border-radius: 50%;
             object-fit: cover;
             margin-bottom: 22px;
-            border: 1px solid rgba(255, 255, 255, 0.18);
+            border: 1px solid rgba(255, 255, 255, 0.15);
         }
 
+        /* Черный никнейм */
         .username {
             font-size: 1.9rem;
-            font-weight: 700;
-            color: #ffffff;
+            font-weight: 800;
+            color: #000000;
             letter-spacing: -0.5px;
             margin-bottom: 8px;
+            text-shadow: 0 0 1px rgba(255, 255, 255, 0.1);
         }
 
+        /* Текст статуса адаптирован под темную карточку */
         .status-text {
             font-size: 1.05rem;
-            color: #ffffff;
+            color: #dddddd;
             font-weight: 400;
             margin-bottom: 16px;
-            opacity: 0.95;
         }
 
         .location {
@@ -139,7 +140,7 @@
             align-items: center;
             justify-content: center;
             gap: 6px;
-            color: #aaaaaa;
+            color: #999999;
             font-size: 0.85rem;
             font-weight: 400;
         }
@@ -147,10 +148,9 @@
         .location svg {
             width: 13px;
             height: 13px;
-            fill: #aaaaaa;
+            fill: #999999;
         }
 
-        /* Анимации старого телевизора */
         @keyframes tv-flicker {
             0% { opacity: 0.98; }
             50% { opacity: 1; }
