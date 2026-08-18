@@ -9,7 +9,7 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
             user-select: none;
         }
 
@@ -23,6 +23,7 @@
             position: relative;
         }
 
+        /* Живой видео-фон */
         .background-video {
             position: absolute;
             top: 0;
@@ -31,6 +32,23 @@
             height: 100%;
             object-fit: cover;
             z-index: 1;
+            pointer-events: none;
+        }
+
+        /* Эффект оригинальной сетки guns.lol поверх видео */
+        .video-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 2;
+            background-image: radial-gradient(rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.5) 100%), 
+                              linear-gradient(rgba(18, 18, 18, 0.3) 50%, rgba(0, 0, 0, 0.4) 50%), 
+                              linear-gradient(90deg, rgba(255, 255, 255, 0.03), rgba(0, 0, 0, 0.1));
+            background-size: 100% 100%, 4px 4px, 4px 4px;
+            backdrop-filter: blur(1px);
+            -webkit-backdrop-filter: blur(1px);
             pointer-events: none;
         }
 
@@ -51,27 +69,29 @@
 
         #overlay p {
             color: #ffffff;
-            font-size: 1.2rem;
-            letter-spacing: 6px;
+            font-size: 1.1rem;
+            letter-spacing: 7px;
             text-transform: uppercase;
             animation: pulse 1.8s infinite alternate;
+            font-weight: 500;
         }
 
+        /* Главная карточка */
         .profile-card {
             position: relative;
-            z-index: 2;
-            background: rgba(20, 20, 20, 0.45);
-            backdrop-filter: blur(14px);
-            -webkit-backdrop-filter: blur(14px);
-            border: 1px solid rgba(255, 255, 255, 0.08);
+            z-index: 3;
+            background: rgba(20, 20, 20, 0.5);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.09);
             width: 440px;
-            padding: 35px 25px;
+            padding: 40px 30px;
             border-radius: 24px;
             text-align: center;
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+            box-shadow: 0 25px 55px rgba(0, 0, 0, 0.65);
             opacity: 0;
-            transform: translateY(20px);
-            transition: opacity 1s ease, transform 1s cubic-bezier(0.16, 1, 0.3, 1);
+            transform: translateY(15px);
+            transition: opacity 0.9s ease, transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
         .profile-card.show {
@@ -84,23 +104,24 @@
             height: 95px;
             border-radius: 50%;
             object-fit: cover;
-            margin-bottom: 18px;
-            border: 1px solid rgba(255, 255, 255, 0.15);
+            margin-bottom: 22px;
+            border: 1px solid rgba(255, 255, 255, 0.18);
         }
 
         .username {
-            font-size: 2rem;
+            font-size: 1.9rem;
             font-weight: 700;
             color: #ffffff;
             letter-spacing: -0.5px;
-            margin-bottom: 6px;
+            margin-bottom: 8px;
         }
 
         .status-text {
-            font-size: 1.1rem;
+            font-size: 1.05rem;
             color: #ffffff;
-            font-weight: 500;
-            margin-bottom: 12px;
+            font-weight: 400;
+            margin-bottom: 16px;
+            opacity: 0.95;
         }
 
         .location {
@@ -108,18 +129,19 @@
             align-items: center;
             justify-content: center;
             gap: 6px;
-            color: #999999;
+            color: #aaaaaa;
             font-size: 0.85rem;
+            font-weight: 400;
         }
 
         .location svg {
-            width: 14px;
-            height: 14px;
-            fill: #999999;
+            width: 13px;
+            height: 13px;
+            fill: #aaaaaa;
         }
 
         @keyframes pulse {
-            0% { opacity: 0.3; }
+            0% { opacity: 0.35; }
             100% { opacity: 1; }
         }
     </style>
@@ -130,9 +152,11 @@
         <p>click to enter</p>
     </div>
 
+    <!-- Задний план из видео и сетки -->
     <video class="background-video" id="bg-video" loop muted playsinline>
         <source src="https://githubusercontent.com" type="video/mp4">
     </video>
+    <div class="video-overlay"></div>
 
     <div class="profile-card" id="card">
         <img src="https://githubusercontent.com" alt="avatar" class="avatar">
