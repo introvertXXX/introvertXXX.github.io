@@ -23,7 +23,6 @@
             position: relative;
         }
 
-        /* Живой видео-фон */
         .background-video {
             position: absolute;
             top: 0;
@@ -35,7 +34,7 @@
             pointer-events: none;
         }
 
-        /* Эффект оригинальной сетки guns.lol поверх видео */
+        /* Полная симуляция эффекта "Старый TV" */
         .video-overlay {
             position: absolute;
             top: 0;
@@ -43,13 +42,25 @@
             width: 100%;
             height: 100%;
             z-index: 2;
-            background-image: radial-gradient(rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.5) 100%), 
-                              linear-gradient(rgba(18, 18, 18, 0.3) 50%, rgba(0, 0, 0, 0.4) 50%), 
-                              linear-gradient(90deg, rgba(255, 255, 255, 0.03), rgba(0, 0, 0, 0.1));
-            background-size: 100% 100%, 4px 4px, 4px 4px;
-            backdrop-filter: blur(1px);
-            -webkit-backdrop-filter: blur(1px);
             pointer-events: none;
+            /* Затемнение по краям (Виньетка) + базовое наложение */
+            background: radial-gradient(circle, rgba(0,0,0,0) 40%, rgba(0,0,0,0.85) 100%),
+                        linear-gradient(rgba(18, 18, 18, 0) 50%, rgba(0, 0, 0, 0.25) 50%), 
+                        linear-gradient(90deg, rgba(255, 255, 255, 0.03), rgba(0, 0, 0, 0.07));
+            background-size: 100% 100%, 6px 6px, 6px 6px;
+        }
+
+        /* Бегущая полоса сканирования и мерцание кинескопа */
+        .video-overlay::after {
+            content: " ";
+            display: block;
+            position: absolute;
+            top: 0; left: 0; bottom: 0; right: 0;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.35) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.04), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.04));
+            z-index: 2;
+            background-size: 100% 3px, 3px 100%;
+            pointer-events: none;
+            animation: tv-flicker 0.15s infinite, tv-scanline 8s linear infinite;
         }
 
         #overlay {
@@ -76,19 +87,18 @@
             font-weight: 500;
         }
 
-        /* Главная карточка */
         .profile-card {
             position: relative;
             z-index: 3;
-            background: rgba(20, 20, 20, 0.5);
+            background: rgba(15, 15, 15, 0.55);
             backdrop-filter: blur(16px);
             -webkit-backdrop-filter: blur(16px);
-            border: 1px solid rgba(255, 255, 255, 0.09);
+            border: 1px solid rgba(255, 255, 255, 0.08);
             width: 440px;
             padding: 40px 30px;
             border-radius: 24px;
             text-align: center;
-            box-shadow: 0 25px 55px rgba(0, 0, 0, 0.65);
+            box-shadow: 0 25px 55px rgba(0, 0, 0, 0.7);
             opacity: 0;
             transform: translateY(15px);
             transition: opacity 0.9s ease, transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
@@ -140,6 +150,18 @@
             fill: #aaaaaa;
         }
 
+        /* Анимации старого телевизора */
+        @keyframes tv-flicker {
+            0% { opacity: 0.98; }
+            50% { opacity: 1; }
+            100% { opacity: 0.99; }
+        }
+
+        @keyframes tv-scanline {
+            0% { transform: translateY(-100vh); }
+            100% { transform: translateY(100vh); }
+        }
+
         @keyframes pulse {
             0% { opacity: 0.35; }
             100% { opacity: 1; }
@@ -152,7 +174,6 @@
         <p>click to enter</p>
     </div>
 
-    <!-- Задний план из видео и сетки -->
     <video class="background-video" id="bg-video" loop muted playsinline>
         <source src="https://githubusercontent.com" type="video/mp4">
     </video>
