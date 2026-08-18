@@ -29,8 +29,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-position: center center;
-            background-repeat: no-repeat;
+            background: url('https://github.io') no-repeat center center;
             background-size: cover;
             z-index: 1;
         }
@@ -131,10 +130,10 @@
         <p>click to enter</p>
     </div>
 
-    <div class="background-gif" id="bg"></div>
+    <div class="background-gif"></div>
 
     <div class="profile-card" id="card">
-        <img src="d.png" alt="avatar" class="avatar">
+        <img src="https://github.io" alt="avatar" class="avatar">
         <div class="username">introvert</div>
         <div class="status-text">пускаю в вену Hashcat</div>
         <div class="location">
@@ -143,16 +142,9 @@
         </div>
     </div>
 
-    <audio id="audio" loop src="anon.mp3"></audio>
+    <audio id="audio" loop src="https://github.io"></audio>
 
     <script>
-        // Обход кэша путей картинок на серверах GitHub Pages
-        const currentRepo = window.location.pathname.replace(/^\/|\/$/g, '');
-        const baseHost = window.location.origin;
-        const correctPath = currentRepo ? `${baseHost}/${currentRepo}/` : `${baseHost}/`;
-        
-        document.getElementById('bg').style.backgroundImage = `url('${correctPath}fon.gif')`;
-
         function enterSite() {
             const overlay = document.getElementById('overlay');
             const card = document.getElementById('card');
