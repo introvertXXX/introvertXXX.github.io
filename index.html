@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>introvert</title>
     <style>
         * {
@@ -34,17 +34,6 @@
             pointer-events: none;
         }
 
-        .dark-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.30);
-            z-index: 1;
-            pointer-events: none;
-        }
-
         #overlay {
             position: fixed;
             top: 0;
@@ -59,6 +48,7 @@
             cursor: pointer;
             transition: opacity 0.5s ease, visibility 0.5s;
         }
+
         #overlay p {
             color: #ffffff;
             font-size: 1.2rem;
@@ -67,121 +57,70 @@
             animation: pulse 1.8s infinite alternate;
         }
 
-        @keyframes pulse {
-            0% { opacity: 0.3; }
-            100% { opacity: 1; }
-        }
-
         .profile-card {
             position: relative;
             z-index: 2;
-            background: rgba(20, 20, 20, 0.40);
+            background: rgba(20, 20, 20, 0.45);
             backdrop-filter: blur(14px);
             -webkit-backdrop-filter: blur(14px);
-            border: 1px solid rgba(255, 255, 255, 0.06);
-            width: 500px;
-            padding: 38px 28px 42px;
-            border-radius: 28px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            width: 440px;
+            padding: 35px 25px;
+            border-radius: 24px;
             text-align: center;
             box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
             opacity: 0;
-            transform: translateY(20px) scale(0.97);
+            transform: translateY(20px);
             transition: opacity 1s ease, transform 1s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
         .profile-card.show {
             opacity: 1;
-            transform: translateY(0) scale(1);
-        }
-
-        .profile-card::before {
-            content: '';
-            position: absolute;
-            inset: -2px;
-            border-radius: 30px;
-            padding: 2px;
-            background: conic-gradient(from 0deg, transparent, rgba(255, 255, 255, 0.04), transparent, rgba(255, 255, 255, 0.04), transparent);
-            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-            -webkit-mask-composite: xor;
-            mask-composite: exclude;
-            pointer-events: none;
-            opacity: 0.5;
-            transition: opacity 0.8s;
-        }
-        .profile-card.show::before {
-            opacity: 1;
+            transform: translateY(0);
         }
 
         .avatar {
-            width: 100px;
-            height: 100px;
+            width: 95px;
+            height: 95px;
             border-radius: 50%;
             object-fit: cover;
             margin-bottom: 18px;
-            border: 2px solid rgba(255, 255, 255, 0.08);
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
-            transition: transform 0.3s ease;
-        }
-        .avatar:hover {
-            transform: scale(1.02);
+            border: 1px solid rgba(255, 255, 255, 0.15);
         }
 
         .username {
-            font-size: 2.2rem;
+            font-size: 2rem;
             font-weight: 700;
-            color: #000000;
+            color: #ffffff;
             letter-spacing: -0.5px;
-            margin-bottom: 4px;
-            text-shadow: 0 1px 3px rgba(255, 255, 255, 0.35);
+            margin-bottom: 6px;
         }
 
         .status-text {
-            font-size: 1.15rem;
-            color: #000000;
+            font-size: 1.1rem;
+            color: #ffffff;
             font-weight: 500;
-            margin-bottom: 10px;
-            text-shadow: 0 1px 3px rgba(255, 255, 255, 0.25);
+            margin-bottom: 12px;
         }
 
         .location {
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 8px;
-            color: #000000;
-            font-size: 0.9rem;
-            font-weight: 500;
-            text-shadow: 0 1px 3px rgba(255, 255, 255, 0.20);
+            gap: 6px;
+            color: #999999;
+            font-size: 0.85rem;
         }
 
         .location svg {
-            width: 16px;
-            height: 16px;
-            fill: #000000;
-            filter: drop-shadow(0 1px 2px rgba(255, 255, 255, 0.15));
+            width: 14px;
+            height: 14px;
+            fill: #999999;
         }
 
-        .divider {
-            width: 44px;
-            height: 2px;
-            margin: 12px auto 14px;
-            background: linear-gradient(90deg, transparent, rgba(0, 0, 0, 0.25), transparent);
-            border-radius: 4px;
-        }
-
-        .profile-card:hover {
-            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(255, 255, 255, 0.04);
-            transition: box-shadow 0.4s ease;
-        }
-
-        @media (max-width: 600px) {
-            .profile-card {
-                width: 92%;
-                padding: 28px 16px 32px;
-            }
-            .username {
-                font-size: 1.8rem;
-            }
+        @keyframes pulse {
+            0% { opacity: 0.3; }
+            100% { opacity: 1; }
         }
     </style>
 </head>
@@ -191,24 +130,21 @@
         <p>click to enter</p>
     </div>
 
-    <div class="dark-overlay"></div>
-
     <video class="background-video" id="bg-video" loop muted playsinline>
-        <source src="fon.mp4" type="video/mp4">
+        <source src="https://githubusercontent.com" type="video/mp4">
     </video>
 
     <div class="profile-card" id="card">
-        <img src="d.png" alt="avatar" class="avatar" />
+        <img src="https://githubusercontent.com" alt="avatar" class="avatar">
         <div class="username">introvert</div>
-        <div class="status-text">пускаю в вечеру Hashcat</div>
-        <div class="divider"></div>
+        <div class="status-text">пускаю в вену Hashcat</div>
         <div class="location">
             <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
             your mother grave
         </div>
     </div>
 
-    <audio id="audio" loop src="anon.mp3"></audio>
+    <audio id="audio" loop src="https://githubusercontent.com"></audio>
 
     <script>
         function enterSite() {
@@ -216,12 +152,12 @@
             const card = document.getElementById('card');
             const audio = document.getElementById('audio');
             const video = document.getElementById('bg-video');
-
+            
             overlay.style.opacity = '0';
             overlay.style.visibility = 'hidden';
-
+            
             video.play().catch(err => console.log("Видео заблокировано"));
-
+            
             setTimeout(() => {
                 card.classList.add('show');
                 audio.play().catch(err => {});
